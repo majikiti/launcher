@@ -43,8 +43,8 @@ function SideNavButton({
           ? "bg-stone-700 text-red-400 before:absolute before:left-0 before:h-2/5 before:w-1 before:rounded-full before:bg-red-400 hover:bg-stone-700"
           : "text-stone-400 hover:bg-stone-600/25 active:bg-stone-600/20",
       )}>
-      <Icon />
-      <span className="text-xs">{label}</span>
+      <Icon className="mt-1" />
+      <span className="text-[.7rem] leading-snug">{label}</span>
     </button>
   )
 }

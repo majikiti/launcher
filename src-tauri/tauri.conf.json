@@ -12,21 +12,17 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
+      "fs": {
+        "all": true
       },
       "window": {
-        "all": false,
-        "close": true,
-        "hide": true,
-        "show": true,
-        "maximize": true,
-        "minimize": true,
-        "unmaximize": true,
-        "unminimize": true,
-        "startDragging": true
+        "all": true
+      },
+      "shell": {
+        "open": true
+      },
+      "dialog": {
+        "all": true
       }
     },
     "bundle": {

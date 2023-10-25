@@ -1,6 +1,4 @@
-import React from "react"
-
-export default function Title({
+export default function ContainerTitle({
   title,
   desc,
 }: {

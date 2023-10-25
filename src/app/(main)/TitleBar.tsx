@@ -17,7 +17,7 @@ export default function TitleBar() {
       <div className="flex">
         <button
           className="px-3 py-2 hover:bg-red-600 active:bg-red-400 active:text-neutral-800"
-          onClick={() => appWindow.close()}>
+          onClick={() => appWindow?.close()}>
           <X size={20} />
         </button>
       </div>

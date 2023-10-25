@@ -1,8 +1,8 @@
 "use client"
 
+import ContainerTitle from "~/components/ContainerTitle"
 import { useConfig } from "~/lib/hooks"
 
-import Title from "../Title"
 import SwitchTile from "./SwitchTile"
 
 export default function SettingsPage() {
@@ -10,7 +10,7 @@ export default function SettingsPage() {
 
   return (
     <>
-      <Title title="Settings" desc="あいうえお" />
+      <ContainerTitle title="Settings" desc="あいうえお" />
       <div className="flex flex-col gap-4">
         <section>
           <h2 className="mb-2 text-xl font-bold">システム設定</h2>

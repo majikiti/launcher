@@ -1,9 +1,9 @@
-import Title from "../Title"
+import ContainerTitle from "~/components/ContainerTitle"
 
 export default function LibraryPage() {
   return (
     <>
-      <Title title="Library" />
+      <ContainerTitle title="Library" />
     </>
   )
 }

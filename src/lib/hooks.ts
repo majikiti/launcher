@@ -6,6 +6,7 @@ import {
   Config,
   configAtom,
   entriesAtom,
+  Entry,
   maximizedAtom,
 } from "./atoms"
 
@@ -38,6 +39,11 @@ export function useConfig(): [Config, (partial: Partial<Config>) => void] {
   return [config, partial => setConfig({ ...config, ...partial })]
 }
 
-export function useEntries() {
-  return useAtom(entriesAtom)
+export function useEntries(): [Entry[], (entries: Entry[]) => void] {
+  const [entries, setEntries] = useAtom(entriesAtom)
+  return [
+    entries,
+    (entries: Entry[]) =>
+      setEntries(entries.sort((a, b) => (a.id > b.id ? 1 : -1))),
+  ]
 }

@@ -22,6 +22,7 @@ export const configAtom = atomWithStorage<Config>("config", {
 export type Entry = {
   id: string
   name: string
+  version?: string
   exec: string | null
 }
 

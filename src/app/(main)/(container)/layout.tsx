@@ -4,6 +4,8 @@ export default function ContainerLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="mx-4 my-6 flex h-full flex-col sm:mx-10">{children}</div>
+    <div className="mx-auto my-6 flex h-full w-full max-w-5xl flex-col px-4 sm:px-10">
+      {children}
+    </div>
   )
 }

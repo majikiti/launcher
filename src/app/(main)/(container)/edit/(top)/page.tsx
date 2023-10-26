@@ -2,32 +2,33 @@
 
 import Link from "next/link"
 
-import ContainerTitle from "~/components/ContainerTitle"
+import Button from "~/components/Button"
+import EntryBar from "~/components/EntryBar"
+import { useEntries } from "~/lib/hooks"
 
 export default function EditPage() {
-  const [entries, setEntries] = useEntries()
+  const [entries] = useEntries()
 
   return (
-    <>
-      <ContainerTitle
-        title="Editor"
-        desc="このタブは設定で非表示にできるよん"
-      />
-      <section>
-        <h2>リスト</h2>
-        <div>
-          <Link href="/edit/entry?id=hoge">a</Link>
-          {entries.map((e, i) => (
-            <Link href={`/edit/entry?id=${e.id}`} key={i} />
-          ))}
+    <section>
+      <div className="mb-3 flex items-center justify-between">
+        <div className="flex items-baseline gap-2 text-xl font-bold">
+          リスト
+          <span className="text-base text-neutral-400">
+            {`(n=${entries.length})`}
+          </span>
         </div>
-      </section>
-      <section>
-        <h2>json</h2>
-        <textarea className="h-32 w-full resize-none rounded-md bg-stone-700 p-1.5 font-mono text-xs">
-          {JSON.stringify(entries, null, 2)}
-        </textarea>
-      </section>
-    </>
+        <Link href="/edit/entry" passHref>
+          <Button>Add</Button>
+        </Link>
+      </div>
+      <div className="flex flex-col gap-2">
+        {entries.map((e, i) => (
+          <Link href={`/edit/entry?id=${e.id}`} passHref key={i}>
+            <EntryBar e={e} />
+          </Link>
+        ))}
+      </div>
+    </section>
   )
 }

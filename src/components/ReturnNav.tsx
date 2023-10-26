@@ -6,7 +6,7 @@ export default function ReturnNav() {
 
   return (
     <button
-      className="flex items-center gap-2 py-2 text-neutral-400 hover:underline"
+      className="mb-6 flex items-center gap-2 py-2 text-neutral-400 hover:underline"
       onClick={router.back}>
       <ChevronLeft />
       <div className="mt-1 text-sm">

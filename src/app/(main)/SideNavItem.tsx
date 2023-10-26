@@ -19,7 +19,11 @@ export default function SideNavItem({
 
   return (
     <Link href={href} passHref>
-      <SideNavButton icon={icon} label={label} active={pathname === href} />
+      <SideNavButton
+        icon={icon}
+        label={label}
+        active={pathname.startsWith(href)}
+      />
     </Link>
   )
 }

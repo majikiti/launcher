@@ -1,25 +1,22 @@
 {
   "name": "launcher",
   "dependencies": {
-    "@hookform/resolvers": "3.3.2",
     "@radix-ui/react-switch": "1.0.3",
     "@tauri-apps/api": "1.5.1",
-    "class-variance-authority": "0.7.0",
     "clsx": "2.0.0",
-    "jotai": "2.4.3",
-    "lucide-react": "0.288.0",
+    "jotai": "2.5.0",
+    "lucide-react": "0.289.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.47.0",
-    "zod": "3.22.4"
+    "react-hook-form": "7.47.0"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "1.5.5",
-    "@types/node": "20.8.7",
-    "@types/react": "18.2.31",
+    "@tauri-apps/cli": "1.5.6",
+    "@types/node": "20.8.9",
+    "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
-    "@typescript-eslint/eslint-plugin": "6.8.0",
-    "@typescript-eslint/parser": "6.8.0",
+    "@typescript-eslint/eslint-plugin": "6.9.0",
+    "@typescript-eslint/parser": "6.9.0",
     "autoprefixer": "10.4.16",
     "eslint": "8.52.0",
     "eslint-config-next": "13.5.6",
@@ -31,13 +28,13 @@
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.6",
     "tailwind-merge": "1.14.0",
-    "tailwindcss": "3.3.3",
+    "tailwindcss": "3.3.5",
     "tailwindcss-animate": "1.0.7",
     "typescript": "5.2.2"
   },
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build --no-lint",
     "dev": "next dev -p 1420",
     "fmt": "prettier -w src",
     "lint": "next lint"

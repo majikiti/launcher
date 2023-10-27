@@ -60,7 +60,7 @@ export default function EditEntryPage() {
   const Star = () => <sup className="text-red-500">*</sup>
 
   const formCls =
-    "rounded-md border border-stone-500/50 bg-stone-600 px-2 pb-1.5 pt-2"
+    "rounded-md border border-stone-500/50 bg-stone-600 px-2 pb-1.5 pt-2 placeholder:text-[darkgray]"
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <ReturnNav />

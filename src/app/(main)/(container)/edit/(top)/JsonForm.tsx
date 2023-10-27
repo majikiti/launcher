@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import Button from "~/components/Button"
-import { useEntries } from "~/lib/hooks"
+import { useCards, useEntries } from "~/lib/hooks"
 import { isJson } from "~/lib/utils"
 
 export default function JsonForm() {
   const [vanilla, setVanilla] = useState(false)
   const [entries, setEntries] = useEntries()
+  const [cards, setCards] = useCards()
 
-  const current = JSON.stringify(entries, null, 2)
+  const current = JSON.stringify({ cards, entries }, null, 2)
 
   type Inputs = { json: string }
 
@@ -26,7 +27,9 @@ export default function JsonForm() {
   }, [current, setValue])
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
-    setEntries(JSON.parse(data.json))
+    const { entries, cards } = JSON.parse(data.json)
+    setEntries(entries)
+    setCards(cards)
     setValue("json", current)
   }
 

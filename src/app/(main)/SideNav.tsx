@@ -11,7 +11,7 @@ export default function SideNav() {
         <SideNavItem href="/home" icon="Home" label="Home" />
         <SideNavItem href="/library" icon="Library" label="Library" />
         {config.showEditor && (
-          <SideNavItem href="/edit" icon="FileEdit" label="Editor" />
+          <SideNavItem href="/edit" icon="PenSquare" label="Editor" />
         )}
       </div>
       <div className="mb-1 flex flex-col gap-1">

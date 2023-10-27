@@ -9,8 +9,8 @@ export default function SettingsPage() {
   const [config, setConfig] = useConfig()
 
   return (
-    <>
-      <ContainerTitle title="Settings" desc="あいうえお" />
+    <div className="flex flex-col gap-6">
+      <ContainerTitle title="Settings" />
       <div className="flex flex-col gap-4">
         <section>
           <h2 className="mb-2 text-xl font-bold">システム設定</h2>
@@ -20,14 +20,9 @@ export default function SettingsPage() {
               value={config.showEditor}
               onChange={() => setConfig({ showEditor: !config.showEditor })}
             />
-            <SwitchTile
-              title="Editorタブを表示する"
-              value={config.showEditor}
-              onChange={() => setConfig({ showEditor: !config.showEditor })}
-            />
           </div>
         </section>
       </div>
-    </>
+    </div>
   )
 }

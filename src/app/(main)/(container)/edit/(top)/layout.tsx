@@ -49,13 +49,13 @@ export default function EditTopLayout({
         <h2 className="text-xl font-bold">json</h2>
         <div>
           <textarea
-            className="h-64 w-full resize-none rounded-md border border-stone-500/50 bg-stone-700 p-1.5 font-mono text-xs"
+            className="h-64 w-full resize-none overflow-auto whitespace-nowrap rounded-md border border-stone-500/50 bg-stone-700 p-1.5 font-mono text-xs"
+            defaultValue={current}
             {...register("json", {
               validate: v => isJson(v),
               onChange: e => setVanilla(e.target.value === current),
-            })}>
-            {current}
-          </textarea>
+            })}
+          />
           {errors.json && <p className="text-red-500">invalid json</p>}
         </div>
         <div className="flex justify-end gap-2">

@@ -8,6 +8,7 @@ import {
   entriesAtom,
   Entry,
   maximizedAtom,
+  runningsAtom,
 } from "./atoms"
 
 export function useAppWindow() {
@@ -19,6 +20,7 @@ export function useAppWindowListener() {
   const setMaximized = useSetAtom(maximizedAtom)
   useEffect(() => {
     if (!appWindow) return
+    appWindow.isMaximized().then(setMaximized)
     const unlistens = Promise.all([
       appWindow.onResized(async () => {
         setMaximized(await appWindow.isMaximized())
@@ -46,4 +48,8 @@ export function useEntries(): [Entry[], (entries: Entry[]) => void] {
     (entries: Entry[]) =>
       setEntries(entries.sort((a, b) => (a.id > b.id ? 1 : -1))),
   ]
+}
+
+export function useRunnings() {
+  return useAtom(runningsAtom)
 }

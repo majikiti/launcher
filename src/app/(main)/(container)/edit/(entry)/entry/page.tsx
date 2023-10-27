@@ -1,7 +1,7 @@
 "use client"
 
 import { open } from "@tauri-apps/api/dialog"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
@@ -14,21 +14,32 @@ import { cn } from "~/lib/utils"
 type FormInputs = {
   id: string
   name: string
+  desc?: string
+  longDesc?: string
+  version?: string
 }
 
 export default function EditEntryPage() {
-  const [file, setFile] = useState<string | null>(null)
+  const router = useRouter()
   const searchParams = useSearchParams()
   const [entries, setEntries] = useEntries()
 
   const id = searchParams.get("id")
-  const defaultValues = id ? entries.find(e => e.id === id) : undefined
+  const entry = id ? entries.find(e => e.id === id) : null
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>({ defaultValues })
+  } = useForm<FormInputs>({
+    defaultValues: {
+      id: entry?.id,
+      name: entry?.name,
+      desc: entry?.desc ?? undefined,
+      longDesc: entry?.longDesc ?? undefined,
+    },
+  })
+  const [exec, setExec] = useState<string | null>(entry?.exec ?? null)
 
   const upsertEntry = (entry: Entry) => {
     setEntries([...entries.filter(e => e.id !== entry.id), entry])
@@ -38,9 +49,14 @@ export default function EditEntryPage() {
     upsertEntry({
       id: data.id,
       name: data.name,
-      exec: file,
+      desc: data.desc || null,
+      longDesc: data.longDesc || null,
+      exec,
     })
+    router.back()
   }
+
+  const Star = () => <sup className="text-red-500">*</sup>
 
   const formCls =
     "rounded-md border border-stone-500/50 bg-stone-600 px-2 pb-1.5 pt-2"
@@ -49,7 +65,24 @@ export default function EditEntryPage() {
       <ReturnNav />
       <div>
         <div className="flex items-center">
-          <label className="w-20">name</label>
+          <label className="w-32">
+            ID
+            <Star />
+          </label>
+          <input
+            className={cn(formCls, "w-full")}
+            placeholder="org.kobe-kosen.hoge"
+            {...register("id", { required: true })}
+          />
+        </div>
+        {errors.id && <p className="ml-20 text-red-500">id is required</p>}
+      </div>
+      <div>
+        <div className="flex items-center">
+          <label className="w-32">
+            表示名
+            <Star />
+          </label>
           <div className="w-full">
             <input
               className={cn(formCls, "w-full")}
@@ -62,28 +95,42 @@ export default function EditEntryPage() {
       </div>
       <div>
         <div className="flex items-center">
-          <label className="w-20">id</label>
+          <label className="w-32">短い説明</label>
           <input
             className={cn(formCls, "w-full")}
-            placeholder="org.kobe-kosen.hoge"
-            {...register("id", { required: true })}
+            placeholder="キャッチコピー的な"
+            {...register("desc", { setValueAs: v => v ?? null })}
           />
         </div>
-        {errors.id && <p className="ml-20 text-red-500">id is required</p>}
+      </div>
+      <div className="flex">
+        <label className="w-32">長い説明</label>
+        <textarea
+          className={cn(formCls, "h-48 w-full resize-none")}
+          placeholder="詳細な説明; 別に無くてもいい"
+          {...register("longDesc")}
+        />
       </div>
       <div className="flex items-center">
-        <label className="w-20">exec</label>
-        <div className="flex w-full gap-3">
+        <label className="w-32">実行ファイル</label>
+        <div className="flex w-full gap-3 overflow-hidden">
           <button
+            type="button"
             className={formCls}
             onClick={async () => {
               const exec = await open()
-              setFile(Array.isArray(exec) ? exec[0] : exec)
+              if (!exec) return
+              setExec(Array.isArray(exec) ? exec[0] : exec)
             }}>
             Choose File
           </button>
-          <div className={cn(formCls, "grow", file ?? "text-[darkgray]")}>
-            {file ?? "null"}
+          <div
+            className={cn(
+              formCls,
+              "grow overflow-x-auto",
+              exec ?? "text-[darkgray]",
+            )}>
+            {exec ?? "null"}
           </div>
         </div>
       </div>

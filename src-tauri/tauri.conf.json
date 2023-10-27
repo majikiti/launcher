@@ -1,25 +1,33 @@
 {
   "build": {
-    "beforeDevCommand": "bun dev",
-    "beforeBuildCommand": "bun run build",
-    "devPath": "http://localhost:1420",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "devPath": "http://localhost:3000",
     "distDir": "../out",
     "withGlobalTauri": true
   },
   "package": {
     "productName": "launcher",
-    "version": "0.0.0"
+    "version": "0.1.0"
   },
   "tauri": {
     "allowlist": {
       "fs": {
-        "all": true
+        "all": true,
+        "scope": ["*"]
       },
       "window": {
         "all": true
       },
       "shell": {
-        "all": true
+        "all": true,
+        "scope": [
+          {
+            "name": "cmd",
+            "cmd": "cmd",
+            "args": true
+          }
+        ]
       },
       "dialog": {
         "all": true

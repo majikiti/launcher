@@ -1,3 +1,4 @@
+import { convertFileSrc } from "@tauri-apps/api/tauri"
 import { ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -13,6 +14,16 @@ export function isJson(str: string) {
     return true
   } catch {
     return false
+  }
+}
+
+export function asset(s: string) {
+  try {
+    const url = new URL(s)
+    if (url.protocol === "file:") return convertFileSrc(s)
+    return s
+  } catch {
+    return convertFileSrc(s)
   }
 }
 

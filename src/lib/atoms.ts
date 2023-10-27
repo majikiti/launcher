@@ -24,6 +24,7 @@ export type Entry = {
   desc: string | null
   longDesc: string | null
   exec: string | null
+  execCnt: number
 }
 
 export type EntryUpdate = Partial<Entry> & Pick<Entry, "id">
@@ -36,3 +37,10 @@ export type Proc = {
 }
 
 export const runningsAtom = atom<Proc[]>([])
+
+export type Card = {
+  id: string
+  pic: string
+}
+
+export const cardsAtom = atomWithStorage<Card[]>("cards", [])

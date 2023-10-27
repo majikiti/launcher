@@ -4,20 +4,16 @@ import { Command } from "@tauri-apps/api/shell"
 import { Play, Square } from "lucide-react"
 import { useState } from "react"
 
-import { useRunnings } from "~/lib/hooks"
+import { useEntries, useRunnings } from "~/lib/hooks"
 
 import Button from "./Button"
 
-export default function ExecButton({
-  id,
-  exec,
-}: {
-  id: string
-  exec: string | null
-}) {
+export default function ExecButton({ id }: { id: string }) {
+  const [entries, setEntries] = useEntries()
   const [runnings, setRunnings] = useRunnings()
   const [runlevel, setRunlevel] = useState(0)
 
+  const exec = entries.find(e => e.id === id)?.exec
   if (!exec)
     return (
       <Button disabled>
@@ -45,6 +41,11 @@ export default function ExecButton({
           const child = await command.spawn()
           setRunnings([...runnings, { id, child }])
           setRunlevel(2)
+          setEntries(
+            entries.map(e =>
+              e.id === id ? { ...e, execCnt: e.execCnt + 1 } : e,
+            ),
+          )
         } catch (e) {
           console.error(e)
           setRunlevel(0)

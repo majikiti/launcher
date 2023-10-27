@@ -1,9 +1,10 @@
+import flowbite from "flowbite/plugin"
 import { Config } from "tailwindcss"
 import { fontFamily } from "tailwindcss/defaultTheme"
 import tailwindcssAnimate from "tailwindcss-animate"
 
 const config: Config = {
-  content: ["./src/**/*.{ts,tsx}"],
+  content: ["./node_modules/flowbite-react/**/*.js", "./src/**/*.{ts,tsx}"],
   darkMode: "class",
   theme: {
     container: {
@@ -34,7 +35,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [tailwindcssAnimate, flowbite],
 }
 
 export default config

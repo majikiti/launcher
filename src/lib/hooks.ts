@@ -3,6 +3,7 @@ import { useEffect } from "react"
 
 import {
   appWindowAtom,
+  cardsAtom,
   Config,
   configAtom,
   entriesAtom,
@@ -52,4 +53,8 @@ export function useEntries(): [Entry[], (entries: Entry[]) => void] {
 
 export function useRunnings() {
   return useAtom(runningsAtom)
+}
+
+export function useCards() {
+  return useAtom(cardsAtom)
 }

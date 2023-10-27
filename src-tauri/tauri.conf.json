@@ -7,30 +7,29 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "launcher",
-    "version": "0.1.0"
+    "productName": "d4_launcher",
+    "version": "0.2.0"
   },
   "tauri": {
     "allowlist": {
       "fs": {
         "all": true,
-        "scope": ["*"]
+        "scope": ["**"]
       },
       "window": {
         "all": true
       },
       "shell": {
         "all": true,
-        "scope": [
-          {
-            "name": "cmd",
-            "cmd": "cmd",
-            "args": true
-          }
-        ]
+        "scope": [{ "name": "cmd", "cmd": "cmd", "args": true }]
       },
       "dialog": {
         "all": true
+      },
+      "protocol": {
+        "all": true,
+        "asset": true,
+        "assetScope": ["**"]
       }
     },
     "bundle": {
@@ -46,7 +45,7 @@
       ]
     },
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost"
     },
     "windows": [
       {

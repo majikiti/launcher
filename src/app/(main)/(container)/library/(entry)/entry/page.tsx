@@ -17,19 +17,21 @@ export default function LibraryEntryPage() {
   const _id = searchParams.get("id")
   const entry = entries.find(e => e.id === _id)
   if (!entry) return <NotFound />
-  const { id, name, exec } = entry
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-4xl font-bold">{`"${name}"`}</h1>
+        <div className="flex items-baseline gap-2">
+          <h1 className="text-4xl font-bold">{`"${entry.name}"`}</h1>
+          <span className="font-bold text-neutral-400">{`(起動回数:${entry.execCnt})`}</span>
+        </div>
         <div className="flex gap-3">
           {config.showEditor && (
-            <Link href={`/edit/entry?id=${id}`} passHref>
+            <Link href={`/edit/entry?id=${entry.id}`} passHref>
               <Button>Edit</Button>
             </Link>
           )}
-          <ExecButton id={id} exec={exec} />
+          <ExecButton id={entry.id} />
         </div>
       </div>
       {entry.desc && <p className="text-lg">{entry.desc}</p>}

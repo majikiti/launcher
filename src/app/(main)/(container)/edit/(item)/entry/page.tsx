@@ -1,6 +1,6 @@
 "use client"
 
-import { open } from "@tauri-apps/api/dialog"
+import { ask, open } from "@tauri-apps/api/dialog"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -52,6 +52,7 @@ export default function EditEntryPage() {
       desc: data.desc || null,
       longDesc: data.longDesc || null,
       exec,
+      execCnt: entry?.execCnt ?? 0,
     })
     router.back()
   }
@@ -75,7 +76,7 @@ export default function EditEntryPage() {
             {...register("id", { required: true })}
           />
         </div>
-        {errors.id && <p className="ml-20 text-red-500">id is required</p>}
+        {errors.id && <p className="ml-28 text-red-500">id is required</p>}
       </div>
       <div>
         <div className="flex items-center">
@@ -91,7 +92,7 @@ export default function EditEntryPage() {
             />
           </div>
         </div>
-        {errors.name && <p className="ml-20 text-red-500">name is required</p>}
+        {errors.name && <p className="ml-28 text-red-500">name is required</p>}
       </div>
       <div>
         <div className="flex items-center">
@@ -135,6 +136,15 @@ export default function EditEntryPage() {
         </div>
       </div>
       <div className="flex justify-end gap-2">
+        <Button
+          type="button"
+          onClick={async () => {
+            if (!(await ask("ほんとにする？"))) return
+            setEntries(entries.filter(e => e.id !== id))
+            router.back()
+          }}>
+          Delete
+        </Button>
         <Button type="submit">Save</Button>
       </div>
     </form>

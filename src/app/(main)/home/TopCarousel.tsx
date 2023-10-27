@@ -25,7 +25,7 @@ export default function TopCarousel() {
 
   return (
     <Carousel
-      className="h-[70%] p-2"
+      className="h-[70vh] p-2"
       leftControl={<ChevronLeft className="text-white/50" size={24} />}
       rightControl={<ChevronRight className="text-white/50" size={24} />}
       slideInterval={5000}

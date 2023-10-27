@@ -3,7 +3,7 @@ import TrendSection from "./TrendSection"
 
 export default function HomePage() {
   return (
-    <div className="flex h-full flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <TopCarousel />
       <TrendSection />
     </div>
